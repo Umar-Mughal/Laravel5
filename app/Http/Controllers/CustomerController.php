@@ -34,5 +34,13 @@ class CustomerController extends Controller
 		return view('single_product',compact('product','cart_items'));
 	}
 
+	public function checkout()
+	{
+		$cart_items=Cart::content();
+		return view('checkout',compact('cart_items'));
+	}
+
+	
+
 
 }

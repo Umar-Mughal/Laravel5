@@ -18,6 +18,7 @@ Route::get('single-product/{product_id}','CustomerController@single_roduct')->na
 Route::resource('cart','CartController');
 Route::get('add-item-to-cart/{id}','CartController@add')->name('add.to.cart');
 Route::get('empty-cart','CartController@empty_cart')->name('empty.cart');
+Route::get('checkout','CustomerController@checkout')->name('checkout');
 
 
 

@@ -1,6 +1,6 @@
  <div class="table_layout">
 
-    <!-- <div class="col-md-8 col-md-offset-2 ">  -->
+ 
        <div class="table_row">
 
          <div class="table_cell">
@@ -104,7 +104,7 @@
          </div><!--/ .table_cell -->
 
      </div> <!-- .table_row -->
-    <!-- </div> -->
+
 
      
 

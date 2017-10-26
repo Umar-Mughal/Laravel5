@@ -46,8 +46,4 @@ class LoginController extends Controller
         return view('auth.login',compact('cart_items'));
     }
 
-    // public function login(Request $request)
-    // {
-    //     dd($request);
-    // }
 }
