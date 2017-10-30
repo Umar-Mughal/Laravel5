@@ -1,57 +1,37 @@
  <div class="table_layout">
-
- 
        <div class="table_row">
-
          <div class="table_cell">
-
              <section>
-
-                 <p class="subcaption">Already registered? Please log in below:</p>
-
+                 <p class="subcaption">{{ __('form.already_rgstrd') }}</p>
                  <form id="login_form" class="type_2" method="POST" action="{{ route('login') }}">
-                    
                     {{ csrf_field() }}
-
                      <ul>
-
                          <li class="row">
-
                              <div class="col-xs-12">
-
-                                 <label for="email" class="required">Email address</label>
+                                 <label for="email" class="required">{{ __('form.email') }}</label>
                                  <input type="email" name="email" id="email">
-
                              </div>
-
                          </li>
-
                          <li class="row">
-
                              <div class="col-xs-12">
-
-                                 <label for="password" class="required">Password</label>
+                                 <label for="password" class="required">{{ __('form.password') }}</label>
                                  <input type="password" name="password" id="password">
-
                              </div>
-
                          </li>
-
                          <li class="row">
-
                              <div class="col-xs-12">
 
                                  <div class="on_the_sides">
 
                                      <div class="left_side">
 
-                                         <a href="shop_checkout.html#" class="small_link">Forgot your password?</a>
+                                         <a href="shop_checkout.html#" class="small_link">{{ __('form.forget_password') }}</a>
 
                                      </div>
 
                                      <div class="right_side">
 
-                                         <span class="prompt">Required Fields</span>
+                                         <span class="prompt">{{ __('form.rqrd_fields') }}</span>
 
                                      </div>
 
@@ -79,13 +59,13 @@
 
                  <div class="left_side">
 
-                     <button type="submit" form="login_form" class="button_blue middle_btn">Login</button>
+                     <button type="submit" form="login_form" class="button_blue middle_btn">{{ __('form.login') }}</button>
 
                  </div>
 
                  <div class="right_side v_centered">
 
-                     <h4>OR Log In With</h4>
+                     <h4>{{ __('form.or_login_with') }}</h4>
 
                      <ul class="horizontal_list social_btns">
 
@@ -106,6 +86,6 @@
      </div> <!-- .table_row -->
 
 
-     
+
 
  </div><!--/ .table_layout -->

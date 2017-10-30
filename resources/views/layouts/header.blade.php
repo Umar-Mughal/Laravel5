@@ -13,7 +13,7 @@
 								<!-- - - - - - - - - - - - - - Login - - - - - - - - - - - - - - - - -->
 								@guest
 
-								<p>Welcom visitor <a data-toggle="modal" href="#myModal">Login</a> or <a href="{{ route('register') }}">Register</a></p>
+								<p>Welcom visitor <a data-toggle="modal" href="#myModal">{{ __('form.login') }}</a> or <a href="{{ route('register') }}">{{ __('form.rgstr') }}</a></p>
 
 								<!-- Modal -->
 								<div id="myModal" class="modal fade" role="dialog">
@@ -23,7 +23,7 @@
 								    <div class="modal-content">
 								      <div class="modal-header">
 								        <button style="margin-right: 5px" type="button" class="close" data-dismiss="modal"></button>
-								        <h4 class="modal-title">Login</h4>
+								        <h4 class="modal-title">{{ __('form.login') }}</h4>
 								      </div>
 								      <div class="modal-body">
 								        <p> @include('layouts.login_form') </p>
@@ -73,21 +73,25 @@
 									<!-- - - - - - - - - - - - - - Language change - - - - - - - - - - - - - - - - -->
 
 									<div class="alignright site_settings">
+										@if (Session::has('locale'))
+											<span class="current open_"><img src="images/flag_en.jpg" alt="">{{ session('locale') }}</span>
+										@else
+											<span class="current open_"><img src="images/flag_en.jpg" alt="">{{ Config::get('app.locale') }}</span>
+										@endif
 
-										<span class="current open_"><img src="images/flag_en.jpg" alt="">English</span>
 
 										<ul class="dropdown site_setting_list language">
 
-											<li class="animated_item"><a href="index.html#"><img src="images/flag_en.jpg" alt=""> English</a></li>
-											<li class="animated_item"><a href="index.html#"><img src="images/flag_g.jpg" alt=""> German</a></li>
-											<li class="animated_item"><a href="index.html#"><img src="images/flag_s.jpg" alt=""> Spanish</a></li>
+											<li class="animated_item"><a href="{{ route('language','en') }}"><img src="images/flag_en.jpg" alt=""> English </a></li>
+											<li class="animated_item"><a href="{{ route('language','ur') }}"><img src="images/flag_g.jpg" alt=""> Urdu </a></li>
+											<li class="animated_item"><a href="{{ route('language','fr') }}"><img src="images/flag_s.jpg" alt=""> French </a></li>
 
 										</ul>
 
 									</div><!--/ .alignright.site_settings-->
 
 									<!-- - - - - - - - - - - - - - End of language change - - - - - - - - - - - - - - - - -->
-									
+
 									<!-- - - - - - - - - - - - - - Currency change - - - - - - - - - - - - - - - - -->
 
 									<div class="alignright site_settings currency">
@@ -115,7 +119,7 @@
 					</div><!--/ .container -->
 
 				</div><!--/ .top_part -->
-				
+
 				<!-- - - - - - - - - - - - - - End of top part - - - - - - - - - - - - - - - - -->
 
 				<hr>
@@ -165,7 +169,7 @@
 									<form class="clearfix search">
 
 										<input type="text" name="" tabindex="1" placeholder="Search..." class="alignleft">
-										
+
 										<!-- - - - - - - - - - - - - - Categories - - - - - - - - - - - - - - - - -->
 
 										<div class="search_category alignleft">
@@ -191,7 +195,7 @@
 										<button class="button_blue def_icon_btn alignleft"></button>
 
 									</form><!--/ #search-->
-									
+
 									<!-- - - - - - - - - - - - - - End search form - - - - - - - - - - - - - - - - -->
 
 								</div><!--/ [col]-->
@@ -241,7 +245,7 @@
 													<!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
 
 													<div class="mega_menu_item">
-													
+
 														<ul class="list_of_links">
 
 															<li><a href="index.html#">Allergy &amp; Sinus</a></li>
@@ -298,9 +302,9 @@
 													<!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
 
 													<div class="mega_menu_item">
-													
+
 														<h6><b>By Category</b></h6>
-													
+
 														<ul class="list_of_links">
 
 															<li><a href="index.html#">Bath &amp; Spa</a></li>
@@ -323,7 +327,7 @@
 													<div class="mega_menu_item">
 
 														<h6><b>By Brand</b></h6>
-													
+
 														<ul class="list_of_links">
 
 															<li><a href="index.html#">Abibas</a></li>
@@ -344,7 +348,7 @@
 													<!-- - - - - - - - - - - - - - Mega menu item - - - - - - - - - - - - - - - - -->
 
 													<div class="mega_menu_item">
-														
+
 														<a href="index.html#">
 															<img src="images/mega_menu_img_1.jpg" alt="">
 														</a>
@@ -441,7 +445,7 @@
 																	<!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
 
 																</div><!--/ .product_item-->
-																
+
 																<!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
 															</div><!--/ [col]-->
@@ -453,7 +457,7 @@
 																<div class="product_item">
 
 																	<!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
-																	
+
 																	<div class="image_wrap">
 
 																		<img src="images/product_img_12.jpg" alt="">
@@ -489,7 +493,7 @@
 																	<!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
 
 																</div><!--/ .product_item-->
-																
+
 																<!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
 															</div><!--/ [col]-->
@@ -501,7 +505,7 @@
 																<div class="product_item">
 
 																	<!-- - - - - - - - - - - - - - Thumbnail - - - - - - - - - - - - - - - - -->
-																	
+
 																	<div class="image_wrap">
 
 																		<img src="images/product_img_13.jpg" alt="">
@@ -537,11 +541,11 @@
 																	<!-- - - - - - - - - - - - - - End of product description - - - - - - - - - - - - - - - - -->
 
 																</div><!--/ .product_item-->
-																
+
 																<!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
 															</div><!--/ [col]-->
-															
+
 														</div><!--/ .row-->
 
 														<hr>
@@ -570,7 +574,7 @@
 													<div class="mega_menu_item">
 
 														<h6><b>By Condition</b></h6>
-													
+
 														<ul class="list_of_links">
 
 															<li><a href="index.html#">Aches &amp; Pains</a></li>
@@ -666,7 +670,7 @@
 												<li><a href="{{ route('checkout') }}">Checkout</a></li>
 												<li><a href="blog_v1.html">Blog</a></li>
 												<li><a href="additional_page_contact.html">Contact Us</a></li>
-												
+
 												<li class="has_submenu">
 
 													<a href="index.html">Pages</a>
@@ -674,7 +678,7 @@
 													<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
 													<ul class="theme_menu submenu">
-														
+
 														<li class="has_submenu current">
 
 															<a href="index.html">Homepage Layouts</a>
@@ -834,7 +838,7 @@
 									<div class="nav_item size_4">
 
 										<a href="index.html#" class="wishlist_button" data-amount="7"></a>
-										
+
 									</div><!--/ .nav_item-->
 
 									<!-- - - - - - - - - - - - - - End of main navigation - - - - - - - - - - - - - - - - -->
@@ -844,7 +848,7 @@
 									<div class="nav_item size_4">
 
 										<a href="index.html#" class="compare_button" data-amount="10"></a>
-										
+
 									</div><!--/ .nav_item-->
 
 									<!-- - - - - - - - - - - - - - End of main navigation - - - - - - - - - - - - - - - - -->
@@ -861,7 +865,7 @@
 										<!-- - - - - - - - - - - - - - Products list - - - - - - - - - - - - - - - - -->
 
 										<div class="shopping_cart dropdown">
-													
+
 													@foreach($cart_items as $item)
 													<div class="animated_item">
 
@@ -888,9 +892,9 @@
 	                     )) !!}
 	                 {!! Form::close() !!}
 
-															
+
 														</div><!--/ .clearfix.sc_product-->
-														
+
 														<!-- - - - - - - - - - - - - - End of product - - - - - - - - - - - - - - - - -->
 
 													</div><!--/ .animated_item-->
@@ -911,7 +915,7 @@
 															<li class="total"><b><span class="price">Total:</span> {{ Cart::total() }}</b></li>
 
 														</ul>
-														
+
 														<!-- - - - - - - - - - - - - - End of total info - - - - - - - - - - - - - - - - -->
 
 													</div><!--/ .animated_item-->
@@ -925,9 +929,9 @@
 													</div><!--/ .animated_item-->
 
 											</div><!--/ .shopping_cart.dropdown-->
-										
+
 										<!-- - - - - - - - - - - - - - End of products list - - - - - - - - - - - - - - - - -->
-										
+
 									</div><!--/ .nav_item-->
 
 									<!-- - - - - - - - - - - - - - End of navigation item - - - - - - - - - - - - - - - - -->
@@ -947,6 +951,3 @@
 				<!-- - - - - - - - - - - - - - End of main navigation wrapper - - - - - - - - - - - - - - - - -->
 
 			</header>
-
-
-			
