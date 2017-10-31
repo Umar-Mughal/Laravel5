@@ -181,3 +181,6 @@
 </div>
 
 @endsection
+
+@section(footer-section)
+@endsection

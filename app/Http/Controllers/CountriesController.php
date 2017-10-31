@@ -5,21 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Country;
 use Session;
+use DB;
+use Dimsav\Translatable\Translatable;
 
 class CountriesController extends Controller
 {
+
+  use Translatable;
+
     public function index()
     {
       // Country::create([
-      // 	'name' => [
-      // 		'en' => "England",
-      // 		'ur' => 'پہلے سے رجسٹرڈ ہیں تو نیچے لاگ اِن کریں',
-      //
-      // 	]
+      // 	'code' => 'pk'
       // ]);
-      $country=Country::find(6);
-      // print_r($country->name);
-      // echo $country['name']['ur'];
+
+      $country=Country::where('code','pk')->get();
+      $country->translate('en')->name='abc';
+      $country->save();
       dd($country);
     }
 
