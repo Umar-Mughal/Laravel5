@@ -6,9 +6,9 @@
     </div>
 </div>
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
-    {!! Form::label('name', 'نام', ['class' => 'col-md-4 col-md-push-7 control-label', 'style'=>'padding-right:50px;']) !!}
+    {!! Form::label('name', 'نام', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('ur[name]', null, ['class' => 'form-control']) !!}
+        {!! Form::text('ur[name]', old('ur[name]'), ['class' => 'form-control']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div><div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}}">
-    {!! Form::label('description', 'تفصیل', ['class' => 'col-md-4 control-label col-md-push-7', 'style'=>'padding-right:50px;']) !!}
+    {!! Form::label('description', 'تفصیل', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
         {!! Form::textarea('ur[description]', null, ['class' => 'form-control']) !!}
         {!! $errors->first('description', '<p class="help-block">:message</p>') !!}
