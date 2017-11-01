@@ -4,8 +4,12 @@ namespace App\admin_area;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Product extends Model
 {
+
+    use \Dimsav\Translatable\Translatable;
+    
     /**
      * The database table used by the model.
      *
@@ -25,7 +29,9 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'description', 'code', 'price', 'quantity', 'category_id', 'image'];
+    protected $fillable = ['code', 'price', 'quantity', 'category_id', 'image'];
 
-    
+    public $translatedAttributes=['name','description'];
+
+
 }

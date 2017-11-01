@@ -2,7 +2,7 @@
     {!! Form::label('parent_id', 'Parent', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
           <select class="form-control" name="parent_id">
-                <option value=0>---None---</option>    
+                <option value=0>---None---</option>
             @foreach($categories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
@@ -12,7 +12,14 @@
 </div><div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::text('name', null, ['class' => 'form-control']) !!}
+        {!! Form::text('en[name]', null, ['class' => 'form-control']) !!}
+        {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+    </div>
+</div>
+<div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
+    {!! Form::label('name', 'نام', ['class' => 'col-md-4 col-md-push-7 control-label', 'style'=>'padding-right:50px;']) !!}
+    <div class="col-md-6">
+        {!! Form::text('ur[name]', null, ['class' => 'form-control']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

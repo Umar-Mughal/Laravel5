@@ -43,14 +43,13 @@ $factory->define(App\admin_area\Product::class, function (Faker $faker) {
     static $password;
 
     return [
-        'name' => $faker->sentence,
-        'description' => $faker->Paragraph,
         'price' => $faker->numberBetween(0,1000),
-        'image' => $faker->word,
+        'image' => 'product_img_17.jpg',
         'code' => $faker->numberBetween(0,100),
         'quantity' => $faker->numberBetween(0,100),
-        'category_id' =>$faker->numberBetween(0,100),
-
+        'category_id' =>19,
+        'en' => ['name'=>$faker->sentence, 'description'=>$faker->paragraph],
+        'ur' => ['name'=>' شاپ می پراڈکٹ', 'description'=>'ایک طویل عرصے سے قائم حقیقت یہ ہے کہ ایک صفحے کے قابل مطالعہ مواد متن کے بیرونی شکل یا صفحے پر پیراگراف کے فارم پر توجہ مرکوز کرنے سے ریڈر کو مشغول کرے گا. لہذا، Lorem ipsum کے طریقہ کار استعمال کیا جاتا ہے کیونکہ اس کے بجائے "متن وہاں موجود مواد ہے، یہاں متن کے مواد" کے بجائے یہ پڑھنے کے قابل متن کی طرح لگ رہا ہے کا استعمال کرنے کے بجائے قدرتی طور پر کسی حد تک کردار کی تقسیم دیتا ہے. بہت سے ڈیسک ٹاپ پبلشنگ اور ایڈیٹنگ سوفٹ ویئر'],
     ];
 });
 

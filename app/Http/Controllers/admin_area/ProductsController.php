@@ -49,7 +49,7 @@ class ProductsController extends Controller
      * @return \Illuminate\View\View
      */
     public function create()
-    {  
+    {
         $categories=Category::all();
         return view('admin_area.products.create',compact('categories'));
     }
@@ -63,13 +63,12 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        
-
 
         $requestData = $request->all();
 
-        $requestData['image']=FileHelper::addFile($request,'image'); //storing image to server 
-        
+        $requestData['image']=FileHelper::addFile($request,'image'); //storing image to server
+
+
         Product::create($requestData);
 
         Session::flash('flash_message', 'Product added!');
@@ -115,9 +114,9 @@ class ProductsController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         $product = Product::findOrFail($id);
         $product->update($requestData);
 

@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+
+    use \Dimsav\Translatable\Translatable;
+
+    public $translatedAttributes=['name'];
     /**
      * The database table used by the model.
      *
@@ -25,7 +29,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['parent_id', 'name'];
+    protected $fillable = ['parent_id'];
 
 
     // public function childs(){
@@ -44,5 +48,5 @@ class Category extends Model
         return $this->hasMany('App\admin_area\Product');
     }
 
-    
+
 }

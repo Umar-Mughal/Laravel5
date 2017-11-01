@@ -19,10 +19,19 @@ class CountriesController extends Controller
       // 	'code' => 'pk'
       // ]);
 
-      $country=Country::where('code','pk')->get();
-      $country->translate('en')->name='abc';
-      $country->save();
-      dd($country);
+      $data = [
+  'code' => 'gr',
+  'en'  => ['name' => 'Greece'],
+  'fr'  => ['name' => 'Grèce'],
+];
+$greece = Country::create($data);
+
+echo $greece->translate('fr')->name; // Grèce
+
+      // $country=Country::where('code','pk')->get();
+      // $country->translate('en')->name='abc';
+      // $country->save();
+      // dd($country);
     }
 
 
