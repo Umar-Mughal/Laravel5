@@ -58,6 +58,13 @@
                                     </li>
                                 </ul>
 
+								@if(session()->has('login_success'))
+									<span style="margin-left:30px;">{{ session()->get('login_success') }}</span>
+
+								@endif
+
+
+
 								@endguest
 
 
@@ -665,7 +672,7 @@
 											<ul>
 
 												<li class="current"><a href="{{ route('home')}}">Home</a></li>
-												<li><a href="shop_my_account.html">My Account</a></li>
+												<li><a href="{{ route('user_account') }}">My Account</a></li>
 												<li><a href="{{ route('cart.index')}}">Shopping Cart</a></li>
 												<li><a href="{{ route('checkout') }}">Checkout</a></li>
 												<li><a href="blog_v1.html">Blog</a></li>
@@ -859,7 +866,7 @@
 
 										<button id="open_shopping_cart" class="open_button" data-amount="{{ Cart::count() }}">
 											<b class="title">My Cart</b>
-											<b class="total_price">{{ Cart::subtotal() }}</b>
+											<b class="total_price">${{ Cart::total() }}</b>
 										</button>
 
 										<!-- - - - - - - - - - - - - - Products list - - - - - - - - - - - - - - - - -->
@@ -912,7 +919,7 @@
 
 															<li><span class="price">Discount:</span> $37.00</li>
 
-															<li class="total"><b><span class="price">Total:</span> {{ Cart::total() }}</b></li>
+															<li class="total"><b><span class="price">Total:</span> ${{ Cart::total() }}</b></li>
 
 														</ul>
 
@@ -924,7 +931,7 @@
 
 														<a href="{{ route('cart.index') }}" class="button_grey">View Cart</a>
 
-														<a href="index.html#" class="button_blue">Checkout</a>
+														<a href="{{ route('checkout') }}" class="button_blue">Checkout</a>
 
 													</div><!--/ .animated_item-->
 

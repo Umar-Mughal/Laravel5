@@ -40,6 +40,12 @@ class CustomerController extends Controller
 		return view('checkout',compact('cart_items'));
 	}
 
+	public function user_account()
+	{
+		$cart_items=Cart::content();
+		return view('user_account',compact('cart_items'));
+	}
+
 	
 
 

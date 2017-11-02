@@ -46,4 +46,15 @@ class LoginController extends Controller
         return view('auth.login',compact('cart_items'));
     }
 
+    protected function authenticated(Request $request, $user)
+    {
+        
+        $request->session()->flash('login_success','You have successfully logged in.');
+
+        if ($request->checkout) {
+            $request->session()->put('checkout',$request->checkout);
+        }
+
+    }
+
 }

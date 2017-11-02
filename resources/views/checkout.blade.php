@@ -29,7 +29,7 @@
 											<form>
 
 												<ul>
-													
+
 													<li>
 
 														<input type="radio" checked="" name="radio_2" id="radio_button_1">
@@ -71,59 +71,53 @@
 
 											<p class="subcaption">Already registered? Please log in below:</p>
 
-											<form id="login_form" class="type_2">
+											<form id="login_form_checkout" class="type_2" method="POST" action="{{ route('login') }}">
+		                   {{ csrf_field() }}
+		                      <ul>
+		                          <li class="row">
+		                              <div class="col-xs-12">
+		                                  <label for="email" class="required">{{ __('form.email') }}</label>
+		                                  <input type="email" name="email" id="email">
+		                              </div>
+		                          </li>
+		                          <li class="row">
+		                              <div class="col-xs-12">
+		                                  <label for="password" class="required">{{ __('form.password') }}</label>
+		                                  <input type="password" name="password" id="password">
+		                              </div>
+		                          </li>
+		                          <li class="row">
+		                              <div class="col-xs-12">
 
-												<ul>
+		                                  <div class="on_the_sides">
 
-													<li class="row">
+		                                      <div class="left_side">
 
-														<div class="col-xs-12">
+		                                          <a href="shop_checkout.html#" class="small_link">{{ __('form.forget_password') }}</a>
 
-															<label for="login_email" class="required">Email address</label>
-															<input type="email" name="" id="login_email">
+		                                      </div>
 
-														</div>
+		                                      <div class="right_side">
 
-													</li>
+		                                          <span class="prompt">{{ __('form.rqrd_fields') }}</span>
 
-													<li class="row">
+		                                      </div>
 
-														<div class="col-xs-12">
+		                                  </div>
 
-															<label for="login_password" class="required">Password</label>
-															<input type="password" name="" id="login_password">
+		                              </div>
 
-														</div>
+		                          </li>
+		                          <li>
+		                          	
+		                          	 {{ Form::hidden('checkout','checkout') }}
 
-													</li>
+		                          </li>
+		
+		                      </ul>
 
-													<li class="row">
 
-														<div class="col-xs-12">
-
-															<div class="on_the_sides">
-
-																<div class="left_side">
-
-																	<a href="shop_checkout.html#" class="small_link">Forgot your password?</a>
-
-																</div>
-
-																<div class="right_side">
-
-																	<span class="prompt">Required Fields</span>
-
-																</div>
-
-															</div>
-
-														</div>
-
-													</li>
-
-												</ul>
-
-											</form>
+		                  </form>
 
 										</section>
 
@@ -145,7 +139,7 @@
 
 											<div class="left_side">
 
-												<button type="submit" form="login_form" class="button_blue middle_btn">Login</button>
+												<button type="submit" form="login_form_checkout" class="button_blue middle_btn">Login</button>
 
 											</div>
 
@@ -176,11 +170,11 @@
 						</div><!--/ .relative -->
 
 					</section>
-		</div>		
+		</div>
 
 </div>
 
 @endsection
 
-@section(footer-section)
+@section('footer-section')
 @endsection

@@ -53,7 +53,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            
+
         ]);
     }
 
@@ -69,17 +69,12 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
-            'city' => $data['city'],
-            'state' => $data['state'],
-            'postal_code' => $data['postal_code'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
     public function showRegistrationForm()
-    { 
+    {
         $cart_items=Cart::content();
         return view('auth.register',compact('cart_items'));
     }

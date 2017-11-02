@@ -44,9 +44,9 @@
 									<tr>
 
 										<!-- - - - - - - - - - - - - - Product Image - - - - - - - - - - - - - - - - -->
-											
+
 										<td class="product_image_col" data-title="Product Image">
-											
+
 											<a href="shop_shopping_cart.html#"><img src="{{('storage/images/' .$item->options->image)}}" alt=""></a>
 
 										</td>
@@ -83,7 +83,7 @@
 										<!-- - - - - - - - - - - - - - Price - - - - - - - - - - - - - - - - -->
 
 										<td class="subtotal" data-title="Price">
-											
+
 											${{$item->price}}
 
 										</td>
@@ -110,7 +110,7 @@
 
 										<td class="total" data-title="Total">
 
-											{{ $item->total() }}
+											${{ $item->total() }}
 
 										</td>
 
@@ -126,10 +126,10 @@
 	                 'method'=>'PUT',
 	                 'url' => ['cart', $item->rowId],
 	                 'style' => 'display:inline',
-	                 'id' => 'myForm' 
+	                 'id' => 'myForm'
 	             	]) !!}
-	             				
-				 
+
+
 
 	                 {!! Form::button('<span class="button_dark_grey icon_btn edit_product"><i class="fa fa-refresh" style="margin-top:8px;"></i></span>', array(
 	                         'type' => 'submit',
@@ -241,7 +241,7 @@
 										<ul>
 
 											<li class="row">
-												
+
 												<div class="col-xs-12">
 
 													<label>Country</label>
@@ -249,7 +249,7 @@
 													<div class="custom_select"><div class="active_option open_select">USA</div><ul class="options_list dropdown"><li class="animated_item" style="transition-delay:0.1s"><a href="#">Australia</a></li><li class="animated_item" style="transition-delay:0.2s"><a href="#">Austria</a></li><li class="animated_item" style="transition-delay:0.3s"><a href="#">Argentina</a></li><li class="animated_item" style="transition-delay:0.4s"><a href="#">Canada</a></li><li class="animated_item" style="transition-delay:0.5s"><a href="#">USA</a></li></ul>
 
 														<select style="display: none;">
-															
+
 															<option value="Australia">Australia</option>
 															<option value="Austria">Austria</option>
 															<option value="Argentina">Argentina</option>
@@ -265,7 +265,7 @@
 											</li>
 
 											<li class="row">
-												
+
 												<div class="col-lg-7 col-md-6">
 
 													<label>State/Province</label>
@@ -318,16 +318,16 @@
 										<tfoot>
 
 											<tr>
-													
+
 												<td>Subtotal</td>
-												<td>{{ Cart::subtotal() }}</td>
+												<td>${{ Cart::subtotal() }}</td>
 
 											</tr>
 
 											<tr class="total">
-													
+
 												<td>Total</td>
-												<td>{{ Cart::total() }}</td>
+												<td>${{ Cart::total() }}</td>
 
 											</tr>
 
@@ -339,7 +339,7 @@
 
 								<footer class="bottom_box">
 
-									<a class="button_blue middle_btn" href="shop_shopping_cart.html#">Proceed to Checkout</a>
+									<a class="button_blue middle_btn" href="{{ route('checkout') }}">Proceed to Checkout</a>
 
 									<div class="single_link_wrap">
 

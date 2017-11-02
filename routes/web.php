@@ -15,6 +15,7 @@ Route::group(['middleware'=>'language'],function(){
   Route::get('/','CustomerController@index');
   Route::get('home','CustomerController@index')->name('home');
   Route::get('single-product/{product_id}','CustomerController@single_product')->name('single.product');
+  Route::get('user_account','CustomerController@user_account')->name('user_account');
 
   Route::resource('cart','CartController');
   Route::get('add-item-to-cart/{id}','CartController@add')->name('add.to.cart');
@@ -28,42 +29,41 @@ Route::group(['middleware'=>'language'],function(){
 
   Route::get('countries','CountriesController@index');
 
-
-
-
-
   Auth::routes();
 
   //admin home route
 
 
-  Route::group(['middleware'=>'auth:admin'], function(){
-
-  Route::get('admin_area/home','admin_area\AdminHomeController@index')->name('admin-home');
-
-  //category routes
-  Route::resource('admin_area/categories', 'admin_area\\CategoriesController');
-
-  //all site admins routes
-
-  Route::resource('admin_area/admins', 'admin_area\\AdminsController');
-
-  //all categories routes
-
-  Route::resource('admin_area/sliders', 'admin_area\\SlidersController');
-
-  //all products routes
-
-  Route::resource('admin_area/products', 'admin_area\\ProductsController');
-
-  }
-  );
-
-
-  Route::get('admin_area/login', 'admin_area\Auth\LoginController@showLoginForm')->name('admin.login');
-
-  Route::post('admin_area/login', 'admin_area\Auth\LoginController@login');
-
-
-  Route::post('admin_area/logout', 'admin_area\Auth\LoginController@logout')->name('admin.logout');
 });
+
+Route::group(['middleware'=>'auth:admin'], function(){
+
+Route::get('admin_area/home','admin_area\AdminHomeController@index')->name('admin-home');
+
+//category routes
+Route::resource('admin_area/categories', 'admin_area\\CategoriesController');
+
+//all site admins routes
+
+Route::resource('admin_area/admins', 'admin_area\\AdminsController');
+
+//all categories routes
+
+Route::resource('admin_area/sliders', 'admin_area\\SlidersController');
+
+//all products routes
+
+Route::resource('admin_area/products', 'admin_area\\ProductsController');
+
+}
+);
+
+
+Route::get('admin_area/login', 'admin_area\Auth\LoginController@showLoginForm')->name('admin.login');
+
+Route::post('admin_area/login', 'admin_area\Auth\LoginController@login');
+
+
+Route::post('admin_area/logout', 'admin_area\Auth\LoginController@logout')->name('admin.logout');
+
+Route::resource('admin_area/record-types', 'admin_area\\RecordTypesController');
