@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 01, 2017 at 02:25 PM
+-- Generation Time: Nov 02, 2017 at 01:59 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -202,11 +202,6 @@ CREATE TABLE `customers` (
   `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -217,8 +212,21 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `city`, `state`, `postal_code`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'umar', 'mughal', 'umar@gmail.com', '03436085438', 'Wazirabad', 'wazirabad', 'Alabama', '52000', '$2y$10$OMpMn9Ji3JZ7Zq9.M8muf.xPc/0MEi6q3H6ijjTSfDvL0soVyAEMO', 'YNepUAHvMVvSrE12Ru4EMciTrU8TY5L6E3DulLj8Xz3VHnlEudMxLMylLl4u', '2017-10-25 07:36:23', '2017-10-25 07:36:23');
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(5, 'umar', 'mughal', 'umar@gmail.com', '$2y$10$WMevZ.SfpQVsXXmvsDEvgeSV4CAj8dqnf25lEhV0Y6s5YDlfZQBDm', 'c2qzs3OJMDLqHvM58ihvfUlX1svAJbgFgvYQyjx9knn0CoRFTduCT0YwVRTU', '2017-11-02 01:45:24', '2017-11-02 01:45:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_addresses`
+--
+
+CREATE TABLE `customer_addresses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -248,7 +256,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2017_10_31_123909_create_country_translations_table', 6),
 (13, '2017_11_01_071329_create_product_translations_table', 6),
 (15, '2017_10_20_082318_create_categories_table', 7),
-(16, '2017_11_01_113124_create_category_translations_table', 7);
+(16, '2017_11_01_113124_create_category_translations_table', 7),
+(18, '2017_11_02_114028_create_customer_addresses_table', 8),
+(19, '2017_11_02_122602_create_record_types_table', 9);
 
 -- --------------------------------------------------------
 
@@ -382,6 +392,29 @@ INSERT INTO `product_translations` (`id`, `product_id`, `locale`, `name`, `descr
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `record_types`
+--
+
+CREATE TABLE `record_types` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `parent_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `record_types`
+--
+
+INSERT INTO `record_types` (`id`, `name`, `parent_id`, `created_at`, `updated_at`) VALUES
+(1, 'Addresses', '0', NULL, NULL),
+(2, 'Default Billing Address', '1', NULL, NULL),
+(3, 'Default Shipping Address', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sliders`
 --
 
@@ -466,6 +499,12 @@ ALTER TABLE `customers`
   ADD UNIQUE KEY `customers_email_unique` (`email`);
 
 --
+-- Indexes for table `customer_addresses`
+--
+ALTER TABLE `customer_addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -496,6 +535,12 @@ ALTER TABLE `product_translations`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `product_translations_product_id_locale_unique` (`product_id`,`locale`),
   ADD KEY `product_translations_locale_index` (`locale`);
+
+--
+-- Indexes for table `record_types`
+--
+ALTER TABLE `record_types`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `sliders`
@@ -548,13 +593,19 @@ ALTER TABLE `country_translations`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `customer_addresses`
+--
+ALTER TABLE `customer_addresses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -573,6 +624,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `product_translations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
+
+--
+-- AUTO_INCREMENT for table `record_types`
+--
+ALTER TABLE `record_types`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `sliders`
