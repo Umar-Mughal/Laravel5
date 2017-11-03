@@ -15,7 +15,9 @@ Route::group(['middleware'=>'language'],function(){
   Route::get('/','CustomerController@index');
   Route::get('home','CustomerController@index')->name('home');
   Route::get('single-product/{product_id}','CustomerController@single_product')->name('single.product');
-  Route::get('user_account','CustomerController@user_account')->name('user_account');
+  Route::get('your_account','CustomerController@customer_account')->name('customer_account');
+
+  Route::get('billing-address','CustomerController@billing_address')->name('billing_address');
 
   Route::resource('cart','CartController');
   Route::get('add-item-to-cart/{id}','CartController@add')->name('add.to.cart');
@@ -67,3 +69,4 @@ Route::post('admin_area/login', 'admin_area\Auth\LoginController@login');
 Route::post('admin_area/logout', 'admin_area\Auth\LoginController@logout')->name('admin.logout');
 
 Route::resource('admin_area/record-types', 'admin_area\\RecordTypesController');
+Route::resource('admin_area/customers-account', 'admin_area\\CustomersAccountController');

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 02, 2017 at 01:59 PM
+-- Generation Time: Nov 03, 2017 at 02:03 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel5ecom`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -218,6 +238,26 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers_accounts`
+--
+
+CREATE TABLE `customers_accounts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer_addresses`
 --
 
@@ -258,7 +298,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2017_10_20_082318_create_categories_table', 7),
 (16, '2017_11_01_113124_create_category_translations_table', 7),
 (18, '2017_11_02_114028_create_customer_addresses_table', 8),
-(19, '2017_11_02_122602_create_record_types_table', 9);
+(19, '2017_11_02_122602_create_record_types_table', 9),
+(20, '2017_11_03_104816_create_customers_accounts_table', 10),
+(21, '2017_11_03_113604_create_addresses_table', 10);
 
 -- --------------------------------------------------------
 
@@ -457,6 +499,12 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
@@ -497,6 +545,12 @@ ALTER TABLE `country_translations`
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `customers_email_unique` (`email`);
+
+--
+-- Indexes for table `customers_accounts`
+--
+ALTER TABLE `customers_accounts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer_addresses`
@@ -560,6 +614,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
@@ -596,16 +656,22 @@ ALTER TABLE `customers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `customers_accounts`
+--
+ALTER TABLE `customers_accounts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `customer_addresses`
 --
 ALTER TABLE `customer_addresses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `pages`

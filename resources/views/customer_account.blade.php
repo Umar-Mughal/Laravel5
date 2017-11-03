@@ -28,7 +28,7 @@
 
 								<ul class="theme_menu">
 
-									<li class="active"><a href="shop_my_account.html#">Account Dashboard</a></li>
+									<li class="active"><a href="{{ route('customer_account') }}">Account Dashboard</a></li>
 									<li><a href="shop_my_account.html#">Account Information</a></li>
 									<li><a href="shop_my_account.html#">Address Book</a></li>
 									<li><a href="shop_my_account.html#">My Orders</a></li>
@@ -63,7 +63,7 @@
 
 						</aside><!--/ [col]-->
 
-						<main class="col-md-9 col-sm-8">
+						<main class="col-md-9 col-sm-8" id="main_area">
 
 							<h1>My Dashboard</h1>
 
@@ -147,7 +147,8 @@
 
 											<p>You have not set a default billing address.</p>
 
-											<a href="shop_my_account.html#" class="button_grey middle_btn">Edit Address</a>
+											<!-- <a href="shop_my_account.html#" class="button_grey middle_btn">Edit Address</a> -->
+											<button id="billing_addrs" class="button_grey middle_btn">Edit Address</button>
 
 										</section>
 
@@ -186,5 +187,21 @@
 			</div>
 @endsection
 
-@section('footer-section')
+@section('footer-content')
+
+<script>	
+		$('#billing_addrs').click(function(){
+			// $('#main_area').load({{ route('billing_address') }});
+			// alert('billing_addrs clicked');
+			// $url={{ route('billing_address') }}
+			$.ajax({
+				url:'billing-address',
+				type:"GET",
+				success:function(data){
+					$('#main_area').html(data);
+				}
+			});
+		});
+</script>
+
 @endsection

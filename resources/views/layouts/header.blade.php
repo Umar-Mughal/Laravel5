@@ -672,7 +672,7 @@
 											<ul>
 
 												<li class="current"><a href="{{ route('home')}}">Home</a></li>
-												<li><a href="{{ route('user_account') }}">My Account</a></li>
+												<li><a href="{{ route('customer_account') }}">My Account</a></li>
 												<li><a href="{{ route('cart.index')}}">Shopping Cart</a></li>
 												<li><a href="{{ route('checkout') }}">Checkout</a></li>
 												<li><a href="blog_v1.html">Blog</a></li>

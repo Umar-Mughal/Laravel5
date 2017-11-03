@@ -40,10 +40,17 @@ class CustomerController extends Controller
 		return view('checkout',compact('cart_items'));
 	}
 
-	public function user_account()
+	public function customer_account()
 	{
 		$cart_items=Cart::content();
-		return view('user_account',compact('cart_items'));
+		return view('customer_account',compact('cart_items'));
+	}
+
+	public function billing_address()
+	{
+		$cart_items=Cart::content();
+		// echo "hello";
+		return view('layouts.customer_account.form',compact('cart_items'));
 	}
 
 	
