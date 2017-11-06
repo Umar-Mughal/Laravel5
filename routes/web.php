@@ -12,24 +12,28 @@
 */
 Route::group(['middleware'=>'language'],function(){
 
-  Route::get('/','CustomerController@index');
-  Route::get('home','CustomerController@index')->name('home');
-  Route::get('single-product/{product_id}','CustomerController@single_product')->name('single.product');
-  Route::get('your_account','CustomerController@customer_account')->name('customer_account');
+  Route::get('/','FrontEndController@index')->name('home');
 
-  Route::get('billing-address','CustomerController@billing_address')->name('billing_address');
+  Route::get('single-product/{product_id}','FrontEndController@single_product')->name('single.product');
+
+  Route::get('your_account','CustomerAccountController@index')->name('customer_account');
+
+  Route::get('checkout','CustomerAccountController@checkout')->name('checkout');
+
+  Route::get('billing-address','CustomerAccountController@create_billing_address');
+
+  Route::post('billing-address','CustomerAccountController@store_billing_address');
 
   Route::resource('cart','CartController');
   Route::get('add-item-to-cart/{id}','CartController@add')->name('add.to.cart');
   Route::get('empty-cart','CartController@empty_cart')->name('empty.cart');
-  Route::get('checkout','CustomerController@checkout')->name('checkout');
+  
 
   Route::get('language/{lang}',function($lang){
     \Session::put('locale',$lang);
     return redirect()->back();
   })->name('language');
 
-  Route::get('countries','CountriesController@index');
 
   Auth::routes();
 
@@ -68,5 +72,6 @@ Route::post('admin_area/login', 'admin_area\Auth\LoginController@login');
 
 Route::post('admin_area/logout', 'admin_area\Auth\LoginController@logout')->name('admin.logout');
 
-Route::resource('admin_area/record-types', 'admin_area\\RecordTypesController');
+
 Route::resource('admin_area/customers-account', 'admin_area\\CustomersAccountController');
+

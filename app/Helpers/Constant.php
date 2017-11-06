@@ -10,4 +10,5 @@ interface Constant
 {
     const CREATE = 1;
     const DELETE= 2;
+    const BILLING_ADDRESS= 3;
 }

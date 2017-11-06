@@ -6,8 +6,8 @@
 
 		<a class="icon_btn button_dark_grey edit_button" href="shop_checkout.html#"><i class="icon-pencil"></i></a>
 
-		<form class="type_2">
-			
+		<form id="address_form" class="type_2">
+                    {{ csrf_field() }}
 			<ul>
 				
 				<li class="row">
@@ -15,14 +15,14 @@
 					<div class="col-sm-6">
 						
 						<label for="first_name" class="required">First Name</label>
-						<input type="text" name="" id="first_name">
+						<input type="text" name="first_name" id="first_name">
 
 					</div><!--/ [col] -->
 
 					<div class="col-sm-6">
 						
 						<label for="last_name" class="required">Last Name</label>
-						<input type="text" name="" id="last_name">
+						<input type="text" name="last_name" id="last_name">
 
 					</div><!--/ [col] -->
 
@@ -31,16 +31,16 @@
 				<li class="row">
 					
 					<div class="col-sm-6">
-						
-						<label for="company_name">Company Name</label>
-						<input type="text" name="" id="company_name">
+
+						<label for="phone" class="required">Phone</label>
+						<input type="text" name="phone" id="phone">
 
 					</div><!--/ [col] -->
 
 					<div class="col-sm-6">
 						
-						<label for="email_address" class="required">Email Address</label>
-						<input type="text" name="" id="email_address">
+						<label for="email" class="required">Email Address</label>
+						<input type="text" name="email" id="email">
 
 					</div><!--/ [col] -->
 
@@ -51,7 +51,7 @@
 					<div class="col-xs-12">
 
 						<label for="address" class="required">Address</label>
-						<input type="text" name="" id="address">
+						<input type="text" name="address" id="address">
 
 					</div><!--/ [col] -->
 
@@ -72,7 +72,7 @@
 					<div class="col-sm-6">
 						
 						<label for="city" class="required">City</label>
-						<input type="text" name="" id="city">
+						<input type="text" name="city" id="city">
 
 					</div><!--/ [col] -->
 
@@ -82,7 +82,7 @@
 
 						<div class="custom_select"><div class="active_option open_select">Alabama</div><ul class="options_list dropdown"><li class="animated_item" style="transition-delay:0.1s"><a href="#">Alabama</a></li><li class="animated_item" style="transition-delay:0.2s"><a href="#">Illinois</a></li><li class="animated_item" style="transition-delay:0.3s"><a href="#">Kansas</a></li></ul>
 
-							<select name="" style="display: none;">
+							<select name="state" style="display: none;">
 
 								<option value="Alabama">Alabama</option>
 								<option value="Illinois">Illinois</option>
@@ -101,38 +101,11 @@
 					<div class="col-sm-6">
 
 						<label for="postal_code" class="required">Zip/Postal Code</label>
-						<input type="text" name="" id="postal_code">
+						<input type="text" name="postal_code" id="postal_code">
 
 					</div><!--/ [col] -->
 
-					<div class="col-sm-6">
 
-						<label for="telephone" class="required">Telephone</label>
-						<input type="text" name="" id="telephone">
-
-					</div><!--/ [col] -->
-
-				</li><!--/ .row -->
-
-				<li class="row">
-
-					<div class="col-xs-12">
-
-						<input type="radio" checked="" name="ship" id="radio_1">
-						<label for="radio_1">Ship to this address</label>
-
-					</div><!--/ [col] -->
-
-				</li><!--/ .row -->
-
-				<li class="row">
-
-					<div class="col-xs-12">
-
-						<input type="radio" name="ship" id="radio_2">
-						<label for="radio_2">Ship to different address</label>
-
-					</div>
 
 				</li><!--/ .row -->
 
@@ -146,7 +119,13 @@
 
 		<div class="left_side">
 
-			<a href="shop_checkout.html#" class="button_blue middle_btn">Continue</a>
+			<!-- <a href="shop_checkout.html#" class="button_blue middle_btn">Save</a> -->
+
+			
+			<button type="submit" id="submit" class="button_blue middle_btn" form="address_form">Save</button>
+
+			<a href="{{ route('customer_account') }}" class="button_blue middle_btn">Back</a>
+
 
 		</div>
 
@@ -159,3 +138,30 @@
 	</footer>
 
 </section>
+
+<script>
+	$("#address_form").submit(function(){
+		var first_name=$("#first_name").val();
+		var last_name=$("#last_name").val();
+		var phone=$("#phone").val();
+		var email=$("#email").val();
+		var address=$("#address").val();
+		var city=$("#city").val();
+		var state=$("#state").val();
+		var postal_code=$("#postal_code").val();
+		var _token=$("input[name=_token]").val();
+		$.ajax({
+			url:'billing-address',
+			type:"POST",
+			data:{first_name:first_name,last_name:last_name,phone:phone,email:email,address:address,city:city,postal_code:postal_code,_token:_token},
+			success:function(data){
+				alert(data);
+			},
+			error:function(status){
+				alert("request faild");
+			}
+		});
+	});
+</script>
+
+

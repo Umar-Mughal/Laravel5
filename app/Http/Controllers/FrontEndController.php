@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\User;
 use App\admin_area\Slider;
 use App\admin_area\Page;
@@ -10,14 +9,13 @@ use App\admin_area\Category;
 use App\admin_area\Product;
 use Cart;
 
+use Illuminate\Http\Request;
 
-class CustomerController extends Controller
+class FrontEndController extends Controller
 {
-
-	public function index()
+    public function index()
 	{
 
-		
 		$categories = Category::where('parent_id',0)->take(4)->get();
 
 		$cart_items=Cart::content();
@@ -33,27 +31,5 @@ class CustomerController extends Controller
 
 		return view('single_product',compact('product','cart_items'));
 	}
-
-	public function checkout()
-	{
-		$cart_items=Cart::content();
-		return view('checkout',compact('cart_items'));
-	}
-
-	public function customer_account()
-	{
-		$cart_items=Cart::content();
-		return view('customer_account',compact('cart_items'));
-	}
-
-	public function billing_address()
-	{
-		$cart_items=Cart::content();
-		// echo "hello";
-		return view('layouts.customer_account.form',compact('cart_items'));
-	}
-
-	
-
-
+ 
 }

@@ -141,16 +141,51 @@
 
 										<!-- - - - - - - - - - - - - - Default billing address - - - - - - - - - - - - - - - - -->
 
-										<section>
+										
+										   <section>
+														<h4>Default Billing Address</h4>
 
-											<h4>Default Billing Address</h4>
+										   	@forelse($customer_address as $adrs)
+													   	<table class="table table-condensed" style="margin-top:10px">
+														    <tbody>
+														      <tr>
+														        <td>Name</td>
+														        <td>{{ $adrs->first_name }}</td>
+														      </tr><tr>
+														        <td>Email</td>
+														        <td>{{ $adrs->email }}</td>
+														      </tr><tr>
+														        <td>Phone</td>
+														        <td>{{ $adrs->phone }}</td>
+														      </tr><tr>
+														        <td>Address</td>
+														        <td>{{ $adrs->address }}</td>
+														      </tr><tr>
+														        <td>City</td>
+														        <td>{{ $adrs->city }}</td>
+														      </tr><tr>
+														        <td>State</td>
+														        <td>{{ $adrs->state }}</td>
+														      </tr><tr>
+														        <td>Postal Code</td>
+														        <td>{{ $adrs->postal_code }}</td>
+														      </tr>
+														    </tbody>
+														  </table>
+													<button id="billing_addrs" class="button_grey middle_btn">Edit Address</button>
+													<button id="billing_addrs" class="button_grey middle_btn">Delete Address</button>
+										@empty
+
+
 
 											<p>You have not set a default billing address.</p>
 
 											<!-- <a href="shop_my_account.html#" class="button_grey middle_btn">Edit Address</a> -->
-											<button id="billing_addrs" class="button_grey middle_btn">Edit Address</button>
-
+											<button id="billing_addrs" class="button_grey middle_btn">Add Address</button>
+												
 										</section>
+
+										@endforelse
 
 										<!-- - - - - - - - - - - - - - End of default billing address - - - - - - - - - - - - - - - - -->
 
@@ -191,9 +226,7 @@
 
 <script>	
 		$('#billing_addrs').click(function(){
-			// $('#main_area').load({{ route('billing_address') }});
-			// alert('billing_addrs clicked');
-			// $url={{ route('billing_address') }}
+
 			$.ajax({
 				url:'billing-address',
 				type:"GET",

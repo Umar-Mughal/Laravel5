@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2017 at 02:03 PM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Nov 06, 2017 at 06:21 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,26 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `laravel5ecom`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `addresses`
---
-
-CREATE TABLE `addresses` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
-  `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -166,54 +146,6 @@ INSERT INTO `category_translations` (`id`, `category_id`, `locale`, `name`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `countries`
---
-
-CREATE TABLE `countries` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `countries`
---
-
-INSERT INTO `countries` (`id`, `code`, `created_at`, `updated_at`) VALUES
-(1, 'pk', '2017-10-31 07:52:36', '2017-10-31 07:52:36'),
-(4, 'gr', '2017-10-31 08:08:24', '2017-10-31 08:08:24'),
-(5, 'gr', '2017-11-01 02:32:30', '2017-11-01 02:32:30'),
-(6, 'gr', '2017-11-01 02:45:17', '2017-11-01 02:45:17');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `country_translations`
---
-
-CREATE TABLE `country_translations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `country_id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `country_translations`
---
-
-INSERT INTO `country_translations` (`id`, `country_id`, `name`, `locale`, `created_at`, `updated_at`) VALUES
-(1, 5, 'Greece', 'en', '2017-11-01 02:32:30', '2017-11-01 02:32:30'),
-(2, 5, 'Grèce', 'fr', '2017-11-01 02:32:30', '2017-11-01 02:32:30'),
-(3, 6, 'Greece', 'en', '2017-11-01 02:45:17', '2017-11-01 02:45:17'),
-(4, 6, 'Grèce', 'fr', '2017-11-01 02:45:17', '2017-11-01 02:45:17');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `customers`
 --
 
@@ -238,35 +170,31 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers_accounts`
---
-
-CREATE TABLE `customers_accounts` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
-  `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `customer_addresses`
 --
 
 CREATE TABLE `customer_addresses` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address_type` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customer_addresses`
+--
+
+INSERT INTO `customer_addresses` (`id`, `customer_id`, `first_name`, `last_name`, `phone`, `email`, `address`, `city`, `state`, `postal_code`, `address_type`, `created_at`, `updated_at`) VALUES
+(1, 5, 'Umar', 'Mughal', '03436085438', 'umar@gmail.com', 'Wazirabad, Abu-al-fateh wali . P.O.B: pathanwali', 'Wazirabad', 'Punjab', '52000', 2, '2017-11-06 10:58:44', '2017-11-06 10:58:44');
 
 -- --------------------------------------------------------
 
@@ -292,15 +220,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2017_10_14_083047_create_pages_table', 1),
 (7, '2017_10_21_131613_create_products_table', 3),
 (8, '2014_10_12_000000_create_customers_table', 4),
-(10, '2017_10_30_114203_create_countries_table', 5),
-(12, '2017_10_31_123909_create_country_translations_table', 6),
 (13, '2017_11_01_071329_create_product_translations_table', 6),
 (15, '2017_10_20_082318_create_categories_table', 7),
 (16, '2017_11_01_113124_create_category_translations_table', 7),
-(18, '2017_11_02_114028_create_customer_addresses_table', 8),
 (19, '2017_11_02_122602_create_record_types_table', 9),
-(20, '2017_11_03_104816_create_customers_accounts_table', 10),
-(21, '2017_11_03_113604_create_addresses_table', 10);
+(23, '2017_11_05_100503_create_customer_addresses_table', 10);
 
 -- --------------------------------------------------------
 
@@ -499,12 +423,6 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `addresses`
---
-ALTER TABLE `addresses`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
@@ -526,31 +444,11 @@ ALTER TABLE `category_translations`
   ADD KEY `category_translations_locale_index` (`locale`);
 
 --
--- Indexes for table `countries`
---
-ALTER TABLE `countries`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `country_translations`
---
-ALTER TABLE `country_translations`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `country_translations_country_id_locale_unique` (`country_id`,`locale`),
-  ADD KEY `country_translations_locale_index` (`locale`);
-
---
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `customers_email_unique` (`email`);
-
---
--- Indexes for table `customers_accounts`
---
-ALTER TABLE `customers_accounts`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `customer_addresses`
@@ -614,101 +512,65 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `addresses`
---
-ALTER TABLE `addresses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
 -- AUTO_INCREMENT for table `category_translations`
 --
 ALTER TABLE `category_translations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `countries`
---
-ALTER TABLE `countries`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `country_translations`
---
-ALTER TABLE `country_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `customers_accounts`
---
-ALTER TABLE `customers_accounts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `customer_addresses`
 --
 ALTER TABLE `customer_addresses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
-
 --
 -- AUTO_INCREMENT for table `product_translations`
 --
 ALTER TABLE `product_translations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
-
 --
 -- AUTO_INCREMENT for table `record_types`
 --
 ALTER TABLE `record_types`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- Constraints for dumped tables
 --
@@ -718,12 +580,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `category_translations`
   ADD CONSTRAINT `category_translations_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `country_translations`
---
-ALTER TABLE `country_translations`
-  ADD CONSTRAINT `country_translations_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `product_translations`
