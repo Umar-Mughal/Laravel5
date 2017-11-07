@@ -1,3 +1,4 @@
+{{ $id }}
 <section class="section_offset">
 
 	<h3> Billing Information</h3>
@@ -5,24 +6,30 @@
 	<div class="theme_box">
 
 		<a class="icon_btn button_dark_grey edit_button" href="shop_checkout.html#"><i class="icon-pencil"></i></a>
+		  @if(isset($customer_address))	
 
-		<form id="address_form" class="type_2">
+						{!! Form::model($customer_address,['id'=>'address_form']) !!}
+		  @else
+		    {!! Form::open(['id'=>'address_form']) !!}	
+		  @endif  
+
                     {{ csrf_field() }}
 			<ul>
 				
 				<li class="row">
-					
-					<div class="col-sm-6">
-						
-						<label for="first_name" class="required">First Name</label>
-						<input type="text" name="first_name" id="first_name">
-
-					</div><!--/ [col] -->
 
 					<div class="col-sm-6">
 						
-						<label for="last_name" class="required">Last Name</label>
-						<input type="text" name="last_name" id="last_name">
+						{!! Form::label('first_name', 'First Name', ['class'=> 'required']) !!}
+
+						{!! Form::text('first_name', null, ['id'=>'first_name']) !!}
+
+					</div> <!--/ [col] -->
+
+					<div class="col-sm-6">
+
+						{!! Form::label('last_name','Last Name', ['class' => 'required']) !!}
+						{!! Form::text('last_name',null, ['id'=>'last_name']) !!}
 
 					</div><!--/ [col] -->
 
@@ -32,15 +39,15 @@
 					
 					<div class="col-sm-6">
 
-						<label for="phone" class="required">Phone</label>
-						<input type="text" name="phone" id="phone">
+						{!! Form::label('phone','Phone',['class'=>'required']) !!}
+						{!! Form::text('phone', null, ['id'=>'phone']) !!}
 
 					</div><!--/ [col] -->
 
 					<div class="col-sm-6">
 						
-						<label for="email" class="required">Email Address</label>
-						<input type="text" name="email" id="email">
+						{!! Form::label('email','Email',['class'=>'required']) !!}
+						{!! Form::text('email', null, ['id'=>'email']) !!}
 
 					</div><!--/ [col] -->
 
@@ -50,8 +57,8 @@
 
 					<div class="col-xs-12">
 
-						<label for="address" class="required">Address</label>
-						<input type="text" name="address" id="address">
+						{!! Form::label('address','Address',['class'=>'required']) !!}
+						{!! Form::text('address', null, ['id'=>'address']) !!}
 
 					</div><!--/ [col] -->
 
@@ -71,26 +78,23 @@
 
 					<div class="col-sm-6">
 						
-						<label for="city" class="required">City</label>
-						<input type="text" name="city" id="city">
+						{!! Form::label('city','City',['class'=>'required']) !!}
+						{!! Form::text('city', null, ['id'=>'city']) !!}
 
-					</div><!--/ [col] -->
+					</div> <!--/ [col] -->
 
 					<div class="col-sm-6">
 
-						<label class="required">State/Province</label>
-
-						<div class="custom_select"><div class="active_option open_select">Alabama</div><ul class="options_list dropdown"><li class="animated_item" style="transition-delay:0.1s"><a href="#">Alabama</a></li><li class="animated_item" style="transition-delay:0.2s"><a href="#">Illinois</a></li><li class="animated_item" style="transition-delay:0.3s"><a href="#">Kansas</a></li></ul>
-
-							<select name="state" style="display: none;">
-
-								<option value="Alabama">Alabama</option>
-								<option value="Illinois">Illinois</option>
-								<option value="Kansas">Kansas</option>
-
-							</select>
-
-						</div>
+						{{ Form::Label('state','Stae/Province', ['class'=>'required']) }}
+							
+					    {!! Form::select('state',
+							    [
+							     'Punjab'=>'Punjab', 
+							     'Sindh'=>'Sindh',
+							     'Khebar Pakhtunhwan'=>'Khebar Pakhtunhwan', 'Balochistan'=>'Balochistan'
+							     ]
+							    ) !!}
+						
 
 					</div><!--/ [col] -->
 
@@ -100,8 +104,8 @@
 
 					<div class="col-sm-6">
 
-						<label for="postal_code" class="required">Zip/Postal Code</label>
-						<input type="text" name="postal_code" id="postal_code">
+						{!! Form::label('postal_code','Postal Code',['class'=>'required']) !!}
+						{!! Form::text('postal_code', null, ['id'=>'postal_code']) !!}
 
 					</div><!--/ [col] -->
 
@@ -111,7 +115,7 @@
 
 			</ul>
 
-		</form>
+		{{ Form::close() }}
 
 	</div>
 
@@ -150,16 +154,18 @@
 		var state=$("#state").val();
 		var postal_code=$("#postal_code").val();
 		var _token=$("input[name=_token]").val();
+		var id={{ $id }}
 		$.ajax({
 			url:'billing-address',
 			type:"POST",
-			data:{first_name:first_name,last_name:last_name,phone:phone,email:email,address:address,city:city,postal_code:postal_code,_token:_token},
+			data:{first_name:first_name,last_name:last_name,phone:phone,email:email,address:address,city:city,postal_code:postal_code,_token:_token, id:id},
 			success:function(data){
-				alert(data);
+				 route('customer_account');
 			},
-			error:function(status){
-				alert("request faild");
-			}
+			error:function(jqXHR, textStatus, errorThrown){
+						// alert(errorThrown);
+						alert(errorThrown);
+				}
 		});
 	});
 </script>

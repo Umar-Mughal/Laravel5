@@ -145,47 +145,25 @@
 										   <section>
 														<h4>Default Billing Address</h4>
 
-										   	@forelse($customer_address as $adrs)
-													   	<table class="table table-condensed" style="margin-top:10px">
-														    <tbody>
-														      <tr>
-														        <td>Name</td>
-														        <td>{{ $adrs->first_name }}</td>
-														      </tr><tr>
-														        <td>Email</td>
-														        <td>{{ $adrs->email }}</td>
-														      </tr><tr>
-														        <td>Phone</td>
-														        <td>{{ $adrs->phone }}</td>
-														      </tr><tr>
-														        <td>Address</td>
-														        <td>{{ $adrs->address }}</td>
-														      </tr><tr>
-														        <td>City</td>
-														        <td>{{ $adrs->city }}</td>
-														      </tr><tr>
-														        <td>State</td>
-														        <td>{{ $adrs->state }}</td>
-														      </tr><tr>
-														        <td>Postal Code</td>
-														        <td>{{ $adrs->postal_code }}</td>
-														      </tr>
-														    </tbody>
-														  </table>
-													<button id="billing_addrs" class="button_grey middle_btn">Edit Address</button>
-													<button id="billing_addrs" class="button_grey middle_btn">Delete Address</button>
-										@empty
+										   	@forelse($billing_address as $adrs)
 
+															@include('layouts.customer.address.show_address'); <!-- table to show address data -->
 
+															<button id="edit_billing_addrs" class="button_grey middle_btn" data-address="2">Edit Address</button>
+															<button id="edit_billing_addrs" class="button_grey middle_btn">Delete Address</button>
 
-											<p>You have not set a default billing address.</p>
+													@empty
 
-											<!-- <a href="shop_my_account.html#" class="button_grey middle_btn">Edit Address</a> -->
-											<button id="billing_addrs" class="button_grey middle_btn">Add Address</button>
-												
+														<p>You have not set a default billing address.</p>
+
+														<!-- <a href="shop_my_account.html#" class="button_grey middle_btn">Edit Address</a> -->
+														<button class="button_grey middle_btn add_address" data-add-address="2">Add Address</button>
+
+												 @endforelse
+
 										</section>
 
-										@endforelse
+										
 
 										<!-- - - - - - - - - - - - - - End of default billing address - - - - - - - - - - - - - - - - -->
 
@@ -195,15 +173,26 @@
 
 										<!-- - - - - - - - - - - - - - Default shipping address - - - - - - - - - - - - - - - - -->
 
-										<section>
+										   <section>
+														<h4>Default Shipping Address</h4>
 
-											<h4>Default Shipping Address</h4>
+										   	@forelse($shipping_address as $adrs)
 
-											<p>You have not set a default shipping address.</p>
+																	@include('layouts.customer.address.show_address'); <!-- table to show address data -->
+																	
+																	<button id="edit_billing_addrs" class="button_grey middle_btn" data-address="3">Edit Address</button>
+																	<button id="edit_billing_addrs" class="button_grey middle_btn">Delete Address</button>
 
-											<a href="shop_my_account.html#" class="button_grey middle_btn">Edit Address</a>
+												  @empty
 
-										</section>
+																<p>You have not set a default shipping address.</p>
+
+																<button class="button_grey middle_btn add_address" data-add-address="3" >Add Address</button>
+
+														@endforelse		
+												
+								 		</section>
+										
 
 										<!-- - - - - - - - - - - - - - End of default shipping address - - - - - - - - - - - - - - - - -->
 
@@ -225,15 +214,40 @@
 @section('footer-content')
 
 <script>	
-		$('#billing_addrs').click(function(){
+		$('.add_address').click(function(){
+     
+   var address_type=$(this).attr('data-add-address');
 
 			$.ajax({
 				url:'billing-address',
 				type:"GET",
+				data:{address_type:address_type},
 				success:function(data){
 					$('#main_area').html(data);
+				},
+				error:function(jqXHR, textStatus, errorThrown){
+					alert(errorThrown);
 				}
 			});
+		});
+			
+
+		$("#edit_billing_addrs").click(function(){
+			   var addrs_type=$("#edit_billing_addrs").attr('data-address');
+						$.ajax({
+								url:'billing-address-edit/'+addrs_type,
+								type:"GET",
+								success:function(data){
+									alert('success');
+									$("#main_area").html(data);
+								},
+
+								error:function(jqXHR, textStatus, errorThrown){
+										// alert(errorThrown);
+										alert(errorThrown);
+								}
+						});
+
 		});
 </script>
 

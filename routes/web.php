@@ -21,8 +21,8 @@ Route::group(['middleware'=>'language'],function(){
   Route::get('checkout','CustomerAccountController@checkout')->name('checkout');
 
   Route::get('billing-address','CustomerAccountController@create_billing_address');
-
   Route::post('billing-address','CustomerAccountController@store_billing_address');
+  Route::get('billing-address-edit/{address_type}','CustomerAccountController@edit_billing_address');
 
   Route::resource('cart','CartController');
   Route::get('add-item-to-cart/{id}','CartController@add')->name('add.to.cart');
