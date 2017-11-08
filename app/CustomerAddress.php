@@ -25,7 +25,7 @@ class CustomerAddress extends Model
      *
      * @var array
      */
-    protected $fillable = ['customer_id', 'first_name', 'last_name', 'phone', 'email', 'address', 'city', 'state', 'address_type'];
+    protected $fillable = ['customer_id', 'first_name', 'last_name', 'phone', 'email', 'address', 'city', 'state', 'postal_code', 'address_type'];
 
     
 }

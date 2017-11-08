@@ -69,19 +69,20 @@
 
 							<section class="theme_box">
 
-								<h4>Hello, John Doe!</h4>
+								<h4>Hello, {{ Auth::user()->first_name }} </h4>
 
 								<p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
 
 							</section><!--/ .theme_box -->
 
 							<!-- - - - - - - - - - - - - - Contact information - - - - - - - - - - - - - - - - -->
-
+       @foreach($cstmr_acnt_info as $cstmr)
 							<section class="theme_box">
 
 								<h4>Contact Information</h4>
+									
 
-								<p>John Doe<br><a href="shop_my_account.html#" class="mail_to">john.doe@gmail.com</a></p>
+								<p>{{ $cstmr->first_name }}<br><a href="shop_my_account.html#" class="mail_to">{{ $cstmr->email }}</a></p>
 
 								<div class="buttons_row">
 
@@ -92,7 +93,7 @@
 								</div>
 
 							</section><!--/ .theme_box -->
-
+							@endforeach
 							<!-- - - - - - - - - - - - - - End of contact information - - - - - - - - - - - - - - - - -->
 
 							<div class="table_layout">
@@ -125,6 +126,8 @@
 
 											<h4>Address Book</h4>
 
+											<p>Here you can manage your addresess.</p>
+
 											<a href="shop_my_account.html#" class="button_grey middle_btn">Manage Addresses</a>
 
 										</section>
@@ -149,7 +152,7 @@
 
 															@include('layouts.customer.address.show_address'); <!-- table to show address data -->
 
-															<button id="edit_billing_addrs" class="button_grey middle_btn" data-address="2">Edit Address</button>
+															<button class="button_grey middle_btn edit_address" data-edit-address="2">Edit Address</button>
 															<button id="edit_billing_addrs" class="button_grey middle_btn">Delete Address</button>
 
 													@empty
@@ -180,7 +183,7 @@
 
 																	@include('layouts.customer.address.show_address'); <!-- table to show address data -->
 																	
-																	<button id="edit_billing_addrs" class="button_grey middle_btn" data-address="3">Edit Address</button>
+																	<button class="button_grey middle_btn edit_address" data-edit-address="3">Edit Address</button>
 																	<button id="edit_billing_addrs" class="button_grey middle_btn">Delete Address</button>
 
 												  @empty
@@ -217,33 +220,49 @@
 		$('.add_address').click(function(){
      
    var address_type=$(this).attr('data-add-address');
-
 			$.ajax({
-				url:'billing-address',
+				url:'address',
 				type:"GET",
 				data:{address_type:address_type},
 				success:function(data){
-					$('#main_area').html(data);
+					
+					@if(Auth::guest())
+						window.location.href = "{{ route('login') }}";
+
+     @else
+						$('#main_area').html(data);
+
+					@endif
+
 				},
+
 				error:function(jqXHR, textStatus, errorThrown){
 					alert(errorThrown);
 				}
+
 			});
+
 		});
 			
 
-		$("#edit_billing_addrs").click(function(){
-			   var addrs_type=$("#edit_billing_addrs").attr('data-address');
+		$(".edit_address").click(function(){
+			   var address_type=$(this).attr('data-edit-address');
+			   // var address_type1=$(this).attr('data-edit-address');
 						$.ajax({
-								url:'billing-address-edit/'+addrs_type,
+								url:'address/'+address_type+'/edit',
 								type:"GET",
 								success:function(data){
-									alert('success');
+
 									$("#main_area").html(data);
+         if(address_type==2)
+        			 $("#address_heading").text('Edit Billing Information');
+         if(address_type==3){
+        	  	$("#address_heading").text('Edit Shipping Information');
+        	}	
+
 								},
 
 								error:function(jqXHR, textStatus, errorThrown){
-										// alert(errorThrown);
 										alert(errorThrown);
 								}
 						});

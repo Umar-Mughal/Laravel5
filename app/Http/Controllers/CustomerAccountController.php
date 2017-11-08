@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use App\CustomerAddress;
+use App\Helpers\Constant;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Helpers\Constant;
 use Illuminate\Support\Facades\Config;
 
 class CustomerAccountController extends Controller
@@ -17,27 +18,28 @@ class CustomerAccountController extends Controller
 
    	  	$billing_address=CustomerAddress::where([
             ['customer_id', '=', Auth::id() ],
-            ['address_type', '=', 5],
+            ['address_type', '=', Config::get('constants.ADDRESS.BILLING_ADDRESS')],
          ])->take(1)->get();   //Getting billing addres 
 
          $shipping_address=CustomerAddress::where([
    	  		['customer_id', '=', Auth::id() ],
-   	  		['address_type', '=', 5],
+   	  		['address_type', '=', Config::get('constants.ADDRESS.SHIPPING_ADDRESS')],
    	  	])->take(1)->get();   //Getting shipping addres 
 
    	   
-
+         $cstmr_acnt_info=Customer::where('id',Auth::id())->get();
 
 		return view('customer_account',compact('cart_items',
-			'billing_address','shipping_address'));
+			'billing_address','shipping_address','cstmr_acnt_info'));
    }
 
-   public function create_billing_address(Request $request)
+   public function create_address(Request $request)
    {    
-         $id=$request->address_type;
-		   return view('layouts.customer.address.form',compact('id'));
+
+         $address_type=$request->address_type;
+		   return view('layouts.customer.address.form',compact('address_type'));
    }
-   
+
 
    public function checkout()
    {
@@ -45,29 +47,27 @@ class CustomerAccountController extends Controller
 		return view('checkout',compact('cart_items'));
    }
 
-   public function store_billing_address(Request $request)
+   public function store_address(Request $request)
    {
+
          $requestData=$request->all();
          $requestData['customer_id']=Auth::id();
-         $requestData['address_type']=2;
+         $requestData['address_type']=$request->id;
          CustomerAddress::create($requestData);
-
-         redirect()->route('customer_account');
 
    }
 
-   public function edit_billing_address($id)
+   public function edit_address($address_type)
    {
-      $customer_address=CustomerAddress::where([
+         $customer_address=CustomerAddress::where([
             ['customer_id', '=', Auth::id() ],
-            ['address_type', '=', $id],
+            ['address_type', '=', $address_type],
          ])->first();
 
-      // $customer_address=CustomerAddress::findOrFail(1);
+         $address_type=$address_type;
 
-      return view('layouts.customer.address.form',compact('customer_address'));
-
-      // return $id;
+      return view('layouts.customer.address.form',compact('customer_address','address_type'));
+      
    }
 
 }

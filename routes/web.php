@@ -16,13 +16,21 @@ Route::group(['middleware'=>'language'],function(){
 
   Route::get('single-product/{product_id}','FrontEndController@single_product')->name('single.product');
 
-  Route::get('your_account','CustomerAccountController@index')->name('customer_account');
+ 
 
   Route::get('checkout','CustomerAccountController@checkout')->name('checkout');
 
-  Route::get('billing-address','CustomerAccountController@create_billing_address');
-  Route::post('billing-address','CustomerAccountController@store_billing_address');
-  Route::get('billing-address-edit/{address_type}','CustomerAccountController@edit_billing_address');
+
+
+  Route::group(['middleware'=>'auth'],function(){
+        Route::get('address','CustomerAccountController@create_address');
+        Route::post('address','CustomerAccountController@store_address');
+        Route::get('address/{address_type}/edit','CustomerAccountController@edit_address');
+        Route::get('your-account','CustomerAccountController@index')->name('customer_account');
+  });
+
+
+  
 
   Route::resource('cart','CartController');
   Route::get('add-item-to-cart/{id}','CartController@add')->name('add.to.cart');

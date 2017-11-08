@@ -1,11 +1,9 @@
-{{ $id }}
 <section class="section_offset">
 
-	<h3> Billing Information</h3>
+	<h3 id="address_heading"> Billing Information</h3>
 
 	<div class="theme_box">
 
-		<a class="icon_btn button_dark_grey edit_button" href="shop_checkout.html#"><i class="icon-pencil"></i></a>
 		  @if(isset($customer_address))	
 
 						{!! Form::model($customer_address,['id'=>'address_form']) !!}
@@ -85,7 +83,7 @@
 
 					<div class="col-sm-6">
 
-						{{ Form::Label('state','Stae/Province', ['class'=>'required']) }}
+						{{ Form::Label('state','State/Province', ['class'=>'required']) }}
 							
 					    {!! Form::select('state',
 							    [
@@ -126,7 +124,7 @@
 			<!-- <a href="shop_checkout.html#" class="button_blue middle_btn">Save</a> -->
 
 			
-			<button type="submit" id="submit" class="button_blue middle_btn" form="address_form">Save</button>
+			<button type="button" id="submit" class="button_blue middle_btn update">Save</button>
 
 			<a href="{{ route('customer_account') }}" class="button_blue middle_btn">Back</a>
 
@@ -143,8 +141,22 @@
 
 </section>
 
-<script>
-	$("#address_form").submit(function(){
+<script type="text/javascript">
+    
+
+    
+    </script>
+
+<script type="text/javascript">
+
+
+ $(document).ready( function()
+  { 
+ 	alert("jquery functioning");  
+ } );
+ 
+
+	$("#submit").click(function(){
 		var first_name=$("#first_name").val();
 		var last_name=$("#last_name").val();
 		var phone=$("#phone").val();
@@ -154,20 +166,34 @@
 		var state=$("#state").val();
 		var postal_code=$("#postal_code").val();
 		var _token=$("input[name=_token]").val();
-		var id={{ $id }}
+		var id={{ $address_type }}
+
 		$.ajax({
-			url:'billing-address',
+			url:'address',
 			type:"POST",
-			data:{first_name:first_name,last_name:last_name,phone:phone,email:email,address:address,city:city,postal_code:postal_code,_token:_token, id:id},
-			success:function(data){
-				 route('customer_account');
+			data:{
+										first_name:first_name,
+										last_name:last_name,
+										phone:phone,email:email,
+										address:address,
+										city:city,
+										state:state,
+										postal_code:postal_code,
+										_token:_token, 
+										id:id
+								},
+
+			success:function(data)
+			{
+				 window.location.href ="{{route('customer_account')}}";
 			},
-			error:function(jqXHR, textStatus, errorThrown){
-						// alert(errorThrown);
+
+			error:function(jqXHR, textStatus, errorThrown)
+			{
 						alert(errorThrown);
 				}
 		});
-	});
+		});
 </script>
 
 
