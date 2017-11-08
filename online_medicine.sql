@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 07, 2017 at 02:22 PM
+-- Generation Time: Nov 08, 2017 at 02:10 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -165,7 +165,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(5, 'umar', 'mughal', 'umar@gmail.com', '$2y$10$WMevZ.SfpQVsXXmvsDEvgeSV4CAj8dqnf25lEhV0Y6s5YDlfZQBDm', 'c2qzs3OJMDLqHvM58ihvfUlX1svAJbgFgvYQyjx9knn0CoRFTduCT0YwVRTU', '2017-11-02 01:45:24', '2017-11-02 01:45:24');
+(5, 'umar', 'mughal', 'umar@gmail.com', '$2y$10$WMevZ.SfpQVsXXmvsDEvgeSV4CAj8dqnf25lEhV0Y6s5YDlfZQBDm', 'nM9EZioOS7JGrAKVbucnLs31SGTiwninblGyY7NcpuESct8Ukfoq7TRsk8cJ', '2017-11-02 01:45:24', '2017-11-02 01:45:24');
 
 -- --------------------------------------------------------
 
@@ -195,7 +195,7 @@ CREATE TABLE `customer_addresses` (
 
 INSERT INTO `customer_addresses` (`id`, `customer_id`, `first_name`, `last_name`, `phone`, `email`, `address`, `city`, `state`, `postal_code`, `address_type`, `created_at`, `updated_at`) VALUES
 (1, 5, 'Umar', 'Mughal', '03436085438', 'umar@gmail.com', 'Wazirabad, Abu-al-fateh wali . P.O.B: pathanwali', 'Wazirabad', 'Punjab', '52000', 2, '2017-11-06 10:58:44', '2017-11-06 10:58:44'),
-(6, 5, 'fads', 'adsf', 'dsaf', NULL, NULL, NULL, 'Punjab', NULL, 2, '2017-11-07 07:21:19', '2017-11-07 07:21:19');
+(52, 5, 'Ali', 'Mughal', '03404003203', 'hackersoft1203@gmail.com', 'Ghakhar District Gujranwal, P.O.B Ghakhar', 'Ghakhar', 'Balochistan', '52200', 3, '2017-11-08 05:58:46', '2017-11-08 05:58:46');
 
 -- --------------------------------------------------------
 
@@ -540,7 +540,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `customer_addresses`
 --
 ALTER TABLE `customer_addresses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `migrations`
